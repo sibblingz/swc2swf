@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="swc2swf" basedir="." default="jar">
+	<property name="source.dir"	value="src"/>
+	<property name="class.dir"	value="bin"/>
+	<property name="jar.file"	value="${ant.project.name}.jar"/>
+	<property name="main-class"	value="io.spaceport.Swc2Swf"/>
+
+	<target name="clean" description="delete old files">
+		<delete dir="${class.dir}"/>
+	<delete file="${jar.file}"/>
+	</target>
+
+	<target name="compile" description="build class files">
+		<mkdir dir="${class.dir}"/>
+        <javac srcdir="${source.dir}" destdir="${class.dir}"/>
+	</target>
+
+	<target name="jar" depends="compile">
+		<jar destfile="${jar.file}" basedir="${class.dir}">
+			<manifest>
+				<attribute name="Main-Class" value="${main-class}"/>
+				<attribute name="Class-Path" value="${manifest.classpath}"/>
+			</manifest>
+
+			<!-- Certificates -->
+			<fileset dir="${source.dir}">
+				<include name="**/*.cer"/>
+			</fileset>
+		</jar>
+	</target>
+
+	<target name="run" depends="jar">
+		<java jar="${jar.file}" fork="true"/>
+	</target>
+</project>
