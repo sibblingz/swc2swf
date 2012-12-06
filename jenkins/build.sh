@@ -16,11 +16,11 @@ fi
 rm -rf $STAGING_AREA/workspace/swc2swf
 mkdir $STAGING_AREA/workspace/swc2swf
 
+#save change documentation to staging area
+$SP_SCRIPTS/copy_component_changes.py $WORKSPACE/../builds/$BUILD_NUMBER/changelog.xml $STAGING_AREA/changes/swc2swf.txt
+
 ant
 
 #move build artifacts to staging area
 cp $WORKSPACE/swc2swf.jar $STAGING_AREA/workspace/swc2swf/
-
-#save change documentation to staging area
-$SP_SCRIPTS/copy_component_changes.py $WORKSPACE/../builds/$BUILD_NUMBER/changelog.xml $STAGING_AREA/changes/swc2swf.txt
 
